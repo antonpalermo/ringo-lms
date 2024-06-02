@@ -1,0 +1,13 @@
+{
+  "name": "ringo-lms",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "turbo run dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "turbo": "^1.13.3"
+  }
+}

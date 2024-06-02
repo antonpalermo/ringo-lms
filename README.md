@@ -1,1 +1,1 @@
-# ringo-lms
+# Ringo - Learning Management System
