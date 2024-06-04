@@ -6,7 +6,7 @@ import { getServerSession } from 'next-auth'
 import options from '@/app/api/auth/options'
 import SessionProvider from '@/components/providers/session'
 
-import '@/styles/globals.css'
+import '@packages/shared-ui/globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
