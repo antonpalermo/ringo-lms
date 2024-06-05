@@ -1,0 +1,16 @@
+{
+  "name": "@packages/globals-database",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^0.9.3",
+    "drizzle-orm": "^0.31.1"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.22.2"
+  },
+  "license": "ISC"
+}
