@@ -1,1 +1,3 @@
-# Ringo - Learning Management System
+# @packages/globals-database
+
+host all database code

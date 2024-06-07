@@ -2,15 +2,25 @@
   "name": "@packages/globals-database",
   "version": "1.0.0",
   "private": true,
+  "exports": {
+    ".": {
+      "default": "./prisma/generated/types.ts"
+    }
+  },
   "scripts": {
+    "load:env": "dotenv -e ../../.env --",
+    "db:generate": "prisma generate",
+    "db:migrate": "pnpm load:env prisma db migrate",
+    "db:push": "pnpm load:env prisma db push",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@neondatabase/serverless": "^0.9.3",
-    "drizzle-orm": "^0.31.1"
+    "@prisma/client": "^5.15.0",
+    "kysely": "^0.27.3",
+    "prisma-kysely": "^1.8.0"
   },
   "devDependencies": {
-    "drizzle-kit": "^0.22.2"
+    "prisma": "^5.15.0"
   },
-  "license": "ISC"
+  "license": "MIT"
 }
