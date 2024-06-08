@@ -13,7 +13,8 @@
     "next-auth": "^4.24.7",
     "react": "^18",
     "react-dom": "^18",
-    "@packages/shared-ui": "workspace:*"
+    "@packages/shared-ui": "workspace:*",
+    "@packages/globals-database": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20",

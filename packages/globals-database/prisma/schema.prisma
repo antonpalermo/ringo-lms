@@ -14,10 +14,10 @@ datasource db {
 }
 
 model Course {
-  id          String   @unique @default(cuid())
+  id          String   @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name        String
   dateCreated DateTime @default(now())
-  dateUpdated DateTime @updatedAt()
+  dateUpdated DateTime @default(now()) @updatedAt()
 
   @@index([id])
   @@map("courses")

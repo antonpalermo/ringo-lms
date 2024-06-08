@@ -5,10 +5,10 @@ export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
 export type Timestamp = ColumnType<Date, Date | string, Date | string>;
 
 export type Course = {
-    id: string;
+    id: Generated<string>;
     name: string;
     dateCreated: Generated<Timestamp>;
-    dateUpdated: Timestamp;
+    dateUpdated: Generated<Timestamp>;
 };
 export type DB = {
     courses: Course;

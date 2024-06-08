@@ -2,12 +2,12 @@
   "name": "@packages/globals-database",
   "version": "1.0.0",
   "private": true,
-  "exports": {
-    ".": {
-      "default": "./prisma/generated/types.ts"
-    }
-  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
+    "clean": "rm -rf ./dist",
+    "build": "pnpm clean && tsup",
     "load:env": "dotenv -e ../../.env --",
     "db:generate": "prisma generate",
     "db:migrate": "pnpm load:env prisma db migrate",
@@ -17,10 +17,13 @@
   "dependencies": {
     "@prisma/client": "^5.15.0",
     "kysely": "^0.27.3",
+    "pg": "^8.12.0",
     "prisma-kysely": "^1.8.0"
   },
   "devDependencies": {
-    "prisma": "^5.15.0"
+    "@types/pg": "^8.11.6",
+    "prisma": "^5.15.0",
+    "tsup": "^8.1.0"
   },
   "license": "MIT"
 }
