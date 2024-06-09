@@ -11,8 +11,6 @@ export async function POST() {
       .returning(['name'])
       .executeTakeFirstOrThrow()
 
-    console.log('course', course)
-
     return NextResponse.json(course)
   } catch (error) {
     console.log(error)
