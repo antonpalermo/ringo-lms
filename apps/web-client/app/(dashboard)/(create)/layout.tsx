@@ -9,7 +9,7 @@ export default function CreateRootLayout({ children }: CreateRootLayoutProps) {
   return (
     <>
       <Navbar />
-      <main>{children}</main>
+      <main className='w-full my-5'>{children}</main>
     </>
   )
 }

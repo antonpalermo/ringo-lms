@@ -12,7 +12,8 @@ export default async function Navbar() {
 
   return (
     <nav className='w-full px-5'>
-      <div className='max-w-7xl mx-auto py-5 flex items-center justify-end'>
+      <div className='max-w-7xl mx-auto py-5 flex items-center justify-between'>
+        <img src='/logo/watchtower-black.svg' alt='app icon' />
         {session && (
           <img
             className='rounded-full w-10 h-10'

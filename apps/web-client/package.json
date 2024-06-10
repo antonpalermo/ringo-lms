@@ -9,12 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@packages/globals-database": "workspace:*",
+    "@packages/shared-ui": "workspace:*",
     "next": "14.2.3",
     "next-auth": "^4.24.7",
     "react": "^18",
     "react-dom": "^18",
-    "@packages/shared-ui": "workspace:*",
-    "@packages/globals-database": "workspace:*"
+    "react-hook-form": "^7.51.5"
   },
   "devDependencies": {
     "@types/node": "^20",
