@@ -12,7 +12,7 @@ import { Input } from '@packages/shared-ui/components/input'
 import { Textarea } from '@packages/shared-ui/components/textarea'
 import { useForm } from 'react-hook-form'
 
-type FormFields = {
+type FormData = {
   name: string
   description: string
 }
@@ -33,31 +33,45 @@ function PageHeading() {
 }
 
 export default function CourseCreatePage() {
-  const initialData: FormFields = {
+  // initial form data.
+  const initialData: FormData = {
     name: '',
     description: ''
   }
 
-  const form = useForm<FormFields>({
+  const form = useForm<FormData>({
     defaultValues: initialData
   })
+
+  async function onSubmit(data: FormData) {
+    const request = await fetch('/api/courses/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+
+    console.log(await request.json())
+  }
 
   return (
     <div className='max-w-2xl mx-auto px-5'>
       <PageHeading />
       <div className='my-5'>
         <Form {...form}>
-          <form className='space-y-5'>
+          <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-5'>
             <FormField
               name='name'
               control={form.control}
-              render={() => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
                     <Input
                       placeholder='Javascript Fundamentals'
                       autoComplete='off'
+                      {...field}
                     />
                   </FormControl>
                 </FormItem>
@@ -66,11 +80,11 @@ export default function CourseCreatePage() {
             <FormField
               name='description'
               control={form.control}
-              render={() => (
+              render={({ field }) => (
                 <FormItem>
                   <FormLabel>Description</FormLabel>
                   <FormControl>
-                    <Textarea placeholder='Course description' />
+                    <Textarea placeholder='Course description' {...field} />
                   </FormControl>
                 </FormItem>
               )}
