@@ -7,6 +7,7 @@ export type Timestamp = ColumnType<Date, Date | string, Date | string>;
 export type Course = {
     id: Generated<string>;
     name: string;
+    description: string | null;
     dateCreated: Generated<Timestamp>;
     dateUpdated: Generated<Timestamp>;
 };
