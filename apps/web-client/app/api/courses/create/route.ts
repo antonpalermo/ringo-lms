@@ -25,15 +25,15 @@ export async function POST(req: Request) {
   }
 
   try {
-    const course = await db
+    await db
       .insertInto('courses')
       .values({
-        name: data.name
+        name: data.name,
+        description: data.description
       })
-      .returning(['name'])
       .executeTakeFirstOrThrow()
 
-    return NextResponse.json(course)
+    return NextResponse.json({ message: 'successfully created.' })
   } catch (error) {
     return NextResponse.json(
       { error: Errors.INTERNAL_SERVER_ERROR },
