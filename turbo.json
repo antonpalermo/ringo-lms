@@ -1,10 +1,11 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "pipeline": {
+  "tasks": {
     "build": {
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "dev": {
+      "inputs": ["$TURBO_DEFAULT$", ".env"],
       "cache": false,
       "persistent": true
     }
