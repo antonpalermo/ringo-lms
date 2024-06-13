@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "load:env": "dotenv -e ../../.env --",
-    "dev": "pnpm load:env && next dev",
+    "dev": "dotenv -e ../../.env -- next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
