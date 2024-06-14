@@ -1,18 +1,7 @@
+import React from 'react'
 import Link from 'next/link'
-import {
-  Bell,
-  CircleUser,
-  Home,
-  LineChart,
-  Menu,
-  Package,
-  Package2,
-  Search,
-  ShoppingCart,
-  Users
-} from 'lucide-react'
+import { Bell, CircleUser, Menu, Package2, Search } from 'lucide-react'
 
-import { Badge } from '@packages/shared-ui/components/badge'
 import { Button } from '@packages/shared-ui/components/button'
 import {
   Card,
@@ -35,7 +24,9 @@ import {
   SheetContent,
   SheetTrigger
 } from '@packages/shared-ui/components/sheet'
+
 import Sidenav from './_components/sidenav'
+import UserMenu from './_components/user-menu'
 
 export default function Dashboard() {
   return (
@@ -53,25 +44,12 @@ export default function Dashboard() {
             </Button>
           </div>
           <div className='flex-1'>
-          <nav className='grid items-start px-2 text-sm font-medium lg:px-4'>
+            <nav className='grid items-start px-2 text-sm font-medium lg:px-4'>
               <Sidenav />
             </nav>
           </div>
           <div className='mt-auto p-4'>
-            <Card x-chunk='dashboard-02-chunk-0'>
-              <CardHeader className='p-2 pt-0 md:p-4'>
-                <CardTitle>Upgrade to Pro</CardTitle>
-                <CardDescription>
-                  Unlock all features and get unlimited access to our support
-                  team.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className='p-2 pt-0 md:p-4 md:pt-0'>
-                <Button size='sm' className='w-full'>
-                  Upgrade
-                </Button>
-              </CardContent>
-            </Card>
+            <UserMenu />
           </div>
         </div>
       </div>
@@ -97,60 +75,10 @@ export default function Dashboard() {
                   <Package2 className='h-6 w-6' />
                   <span className='sr-only'>Acme Inc</span>
                 </Link>
-                <Link
-                  href='#'
-                  className='mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground'
-                >
-                  <Home className='h-5 w-5' />
-                  Dashboard
-                </Link>
-                <Link
-                  href='#'
-                  className='mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground'
-                >
-                  <ShoppingCart className='h-5 w-5' />
-                  Orders
-                  <Badge className='ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full'>
-                    6
-                  </Badge>
-                </Link>
-                <Link
-                  href='#'
-                  className='mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground'
-                >
-                  <Package className='h-5 w-5' />
-                  Products
-                </Link>
-                <Link
-                  href='#'
-                  className='mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground'
-                >
-                  <Users className='h-5 w-5' />
-                  Customers
-                </Link>
-                <Link
-                  href='#'
-                  className='mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground'
-                >
-                  <LineChart className='h-5 w-5' />
-                  Analytics
-                </Link>
+                <Sidenav />
               </nav>
               <div className='mt-auto'>
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Upgrade to Pro</CardTitle>
-                    <CardDescription>
-                      Unlock all features and get unlimited access to our
-                      support team.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <Button size='sm' className='w-full'>
-                      Upgrade
-                    </Button>
-                  </CardContent>
-                </Card>
+                <UserMenu />
               </div>
             </SheetContent>
           </Sheet>
