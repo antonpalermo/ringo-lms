@@ -1,16 +1,26 @@
 import { createBrowserRouter } from 'react-router-dom'
-import App from './App'
+
+import DashboardPage from './pages/dashboard'
+import CoursesPage from './pages/courses'
+import DashboardLayout from './pages/layouts/dashboard.layout'
 
 const route = createBrowserRouter([
   {
     path: '/',
     children: [
       {
-        path: '/dashboard',
-        element: <App />
+        path: 'dashboard',
+        element: <DashboardLayout />,
+        children: [
+          {
+            index: true,
+            element: <DashboardPage />
+          }
+        ]
       },
       {
-        path: '/courses'
+        path: 'courses',
+        children: [{ index: true, element: <CoursesPage /> }]
       }
     ]
   }
