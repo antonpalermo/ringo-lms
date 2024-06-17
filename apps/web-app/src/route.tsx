@@ -1,26 +1,40 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { Outlet, createBrowserRouter } from 'react-router-dom'
 
-import DashboardPage from './pages/dashboard'
+import CoursePage from './pages/course'
 import CoursesPage from './pages/courses'
-import DashboardLayout from './pages/layouts/dashboard.layout'
+import DashboardPage from './pages/dashboard'
+import EditCoursePage from './pages/course-edit'
+import CreateCoursePage from './pages/course-create'
 
 const route = createBrowserRouter([
   {
     path: '/',
     children: [
       {
-        path: 'dashboard',
-        element: <DashboardLayout />,
-        children: [
-          {
-            index: true,
-            element: <DashboardPage />
-          }
-        ]
+        index: true,
+        element: <DashboardPage />
       },
       {
         path: 'courses',
-        children: [{ index: true, element: <CoursesPage /> }]
+        element: <Outlet />,
+        children: [
+          {
+            index: true,
+            element: <CoursesPage />
+          },
+          {
+            path: 'create',
+            element: <CreateCoursePage />
+          },
+          {
+            path: ':courseId',
+            element: <Outlet />,
+            children: [
+              { index: true, element: <CoursePage /> },
+              { path: 'edit', element: <EditCoursePage /> }
+            ]
+          }
+        ]
       }
     ]
   }
