@@ -17,6 +17,9 @@ importers:
 
   apps/web-app:
     dependencies:
+      '@packages/shared-ui':
+        specifier: workspace:*
+        version: link:../../packages/shared-ui
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -42,6 +45,9 @@ importers:
       '@vitejs/plugin-react-swc':
         specifier: ^3.5.0
         version: 3.7.0(@swc/helpers@0.5.5)(vite@5.3.1(@types/node@20.14.2))
+      autoprefixer:
+        specifier: ^10.4.19
+        version: 10.4.19(postcss@8.4.38)
       eslint:
         specifier: ^8.57.0
         version: 8.57.0
@@ -51,6 +57,12 @@ importers:
       eslint-plugin-react-refresh:
         specifier: ^0.4.6
         version: 0.4.7(eslint@8.57.0)
+      postcss:
+        specifier: ^8
+        version: 8.4.38
+      tailwindcss:
+        specifier: ^3.4.1
+        version: 3.4.3
       typescript:
         specifier: ^5.2.2
         version: 5.4.5

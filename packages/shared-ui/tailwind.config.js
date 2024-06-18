@@ -10,7 +10,7 @@ module.exports = {
     './src/**/*.{ts,tsx}',
     './packages/shared-ui/**/*.{ts,tsx}'
   ],
-  prefix: '',
+  prefix: 'ui',
   theme: {
     container: {
       center: true,
