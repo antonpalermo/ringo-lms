@@ -6,34 +6,55 @@ import DashboardPage from './pages/dashboard'
 import EditCoursePage from './pages/course-edit'
 import CreateCoursePage from './pages/course-create'
 
+import SignInPage from './pages/sign-in'
+import SignUpPage from './pages/sign-up'
+
 const route = createBrowserRouter([
   {
     path: '/',
     children: [
       {
-        index: true,
-        element: <DashboardPage />
+        path: 'dashboard',
+        element: <Outlet />,
+        children: [
+          { index: true, element: <DashboardPage /> },
+          {
+            path: 'courses',
+            element: <CoursesPage />
+          }
+        ]
       },
       {
         path: 'courses',
         element: <Outlet />,
+        children: [{ path: ':courseId', element: <CoursePage /> }]
+      },
+      {
+        path: 'create',
+        element: <Outlet />,
         children: [
           {
-            index: true,
-            element: <CoursesPage />
-          },
-          {
-            path: 'create',
+            path: 'course',
             element: <CreateCoursePage />
-          },
-          {
-            path: ':courseId',
-            element: <Outlet />,
-            children: [
-              { index: true, element: <CoursePage /> },
-              { path: 'edit', element: <EditCoursePage /> }
-            ]
           }
+        ]
+      },
+      {
+        path: 'edit',
+        element: <Outlet />,
+        children: [
+          {
+            path: 'course/:courseId',
+            element: <EditCoursePage />
+          }
+        ]
+      },
+      {
+        path: 'auth',
+        element: <Outlet />,
+        children: [
+          { path: 'signin', element: <SignInPage /> },
+          { path: 'signup', element: <SignUpPage /> }
         ]
       }
     ]
