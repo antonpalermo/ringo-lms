@@ -1,4 +1,4 @@
-import useDocumentTitle from '../hooks/use-document-title'
+import useDocumentTitle from '@/hooks/use-document-title'
 
 export default function EditCoursePage() {
   useDocumentTitle(`Edit - Untitled`)
