@@ -9,10 +9,12 @@ import CreateCoursePage from './pages/course-create'
 import SignInPage from './pages/sign-in'
 import SignUpPage from './pages/sign-up'
 import AuthLayout from './pages/layouts/auth.layout'
+import DashboardLayout from './pages/layouts/dashboard.layout'
 
 const route = createBrowserRouter([
   {
     path: '/',
+    element: <DashboardLayout />,
     children: [
       {
         index: true,
