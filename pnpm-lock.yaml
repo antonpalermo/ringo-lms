@@ -15,16 +15,6 @@ importers:
         specifier: ^2.0.3
         version: 2.0.4
 
-  apps/rest-server:
-    dependencies:
-      express:
-        specifier: ^4.19.2
-        version: 4.19.2
-    devDependencies:
-      '@types/express':
-        specifier: ^4.17.21
-        version: 4.17.21
-
   apps/web-app:
     dependencies:
       '@packages/shared-ui':
@@ -167,6 +157,9 @@ importers:
 
   apps/web-server:
     dependencies:
+      '@packages/globals-database':
+        specifier: workspace:*
+        version: link:../../packages/globals-database
       express:
         specifier: ^4.19.2
         version: 4.19.2
