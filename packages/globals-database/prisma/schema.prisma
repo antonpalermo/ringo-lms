@@ -23,3 +23,14 @@ model Course {
   @@index([id])
   @@map("courses")
 }
+
+model Chapter {
+  id          String   @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title       String
+  description String
+  dateCreated DateTime @default(now())
+  dateUpdated DateTime @default(now()) @updatedAt()
+
+  @@index([id])
+  @@map("chapters")
+}
