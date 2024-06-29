@@ -1,19 +1,9 @@
 import { Injectable } from '@nestjs/common'
+import { db } from '@packages/globals-database'
 
 @Injectable()
 export class CoursesService {
-  private readonly courses: any[] = [
-    {
-      name: 'Javascript Fundamentals',
-      description: 'Javascript for absolute beginers.'
-    },
-    {
-      name: 'Rust Basic',
-      description: 'Introduction to rust programming.'
-    }
-  ]
-
-  getCourses() {
-    return this.courses
+  async getCourses() {
+    return await db.selectFrom('courses').selectAll().execute()
   }
 }
