@@ -1,27 +1,67 @@
 import { Injectable } from '@nestjs/common'
 import { db } from '@packages/globals-database'
+
 import { CreateCourseDTO } from './dto/create-course.dto'
 import { UpdateCourseDTO } from './dto/update-course.dto'
 
 @Injectable()
 export class CoursesService {
-  async create(createCourseDTO: CreateCourseDTO) {
-    return `This action will create a new course entry with the provided ${createCourseDTO} object`
+  async createCourse({
+    name,
+    description
+  }: CreateCourseDTO): Promise<any> /** TODO: update inferred type */ {
+    try {
+      return await db
+        .insertInto('courses')
+        .values({
+          name,
+          description
+        })
+        .returning(['courses.id', 'courses.name'])
+        .executeTakeFirst()
+    } catch (error) {
+      console.log('error: ', error)
+    }
   }
 
-  async update(id: string, updateCourseDTO: UpdateCourseDTO) {
-    return `This action will update existing course entry with the provided id ${id} and ${updateCourseDTO} object`
+  async updateCourse(updateCourseDTO: UpdateCourseDTO): Promise<any> {
+    try {
+      return await db
+        .updateTable('courses')
+        .set({ ...updateCourseDTO })
+        .where('courses.id', '=', updateCourseDTO.id)
+        .returning(['courses.id', 'courses.name'])
+        .executeTakeFirst()
+    } catch (error) {
+      console.log('error: ', error)
+    }
   }
 
-  async delete(id: string) {
-    return `This action will delete existing course entry with the provided id ${id}`
+  async deleteCourse(id: string): Promise<any> {
+    try {
+      return await db
+        .deleteFrom('courses')
+        .where('courses.id', '=', id)
+        .returning('courses.id')
+        .executeTakeFirst()
+    } catch (error) {
+      console.log('error: ', error)
+    }
   }
 
-  async course(id: string) {
-    return `This action returns a course with the ${id} provided`
+  async find(id: string) {
+    return await db
+      .selectFrom('courses')
+      .selectAll()
+      .where('courses.id', '=', id)
+      .executeTakeFirst()
   }
 
-  async courses() {
-    return await db.selectFrom('courses').selectAll().execute()
+  async findAll() {
+    try {
+      return await db.selectFrom('courses').selectAll().execute()
+    } catch (error) {
+      console.log(error)
+    }
   }
 }

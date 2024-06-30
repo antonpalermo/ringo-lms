@@ -2,16 +2,35 @@ import { Controller } from '@nestjs/common'
 import { MessagePattern } from '@nestjs/microservices'
 
 import { CoursesService } from './courses.service'
+import { CreateCourseDTO } from './dto/create-course.dto'
+import { UpdateCourseDTO } from './dto/update-course.dto'
 
 @Controller()
 export class CoursesController {
   constructor(private readonly courseService: CoursesService) {}
 
+  @MessagePattern({ cmd: 'create_course' })
+  async createCourse(data: CreateCourseDTO) {
+    return await this.courseService.createCourse(data)
+  }
+
+  @MessagePattern({ cmd: 'update_course' })
+  async updateCourse(data: UpdateCourseDTO) {
+    return await this.courseService.updateCourse(data)
+  }
+
+  @MessagePattern({ cmd: 'delete_course' })
+  async deleteCourse(id: string) {
+    return this.courseService.deleteCourse(id)
+  }
+
   @MessagePattern({ cmd: 'get_courses' })
-  courses() {
-    return this.courseService.courses()
+  async getCourses() {
+    return await this.courseService.findAll()
   }
 
   @MessagePattern({ cmd: 'get_course' })
-  course() {}
+  async getCourse(id: string) {
+    return await this.courseService.find(id)
+  }
 }
