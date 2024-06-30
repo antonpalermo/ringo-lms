@@ -8,7 +8,10 @@ export class CoursesController {
   constructor(private readonly courseService: CoursesService) {}
 
   @MessagePattern({ cmd: 'get_courses' })
-  getCourses() {
-    return this.courseService.getCourses()
+  courses() {
+    return this.courseService.courses()
   }
+
+  @MessagePattern({ cmd: 'get_course' })
+  course() {}
 }
