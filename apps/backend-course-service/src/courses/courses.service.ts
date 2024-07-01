@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, Logger } from '@nestjs/common'
 import { db } from '@packages/globals-database'
 
 import { CreateCourseDTO } from './dto/create-course.dto'
@@ -6,6 +6,8 @@ import { UpdateCourseDTO } from './dto/update-course.dto'
 
 @Injectable()
 export class CoursesService {
+  private readonly logger = new Logger(CoursesService.name)
+
   async createCourse({
     name,
     description
@@ -20,7 +22,7 @@ export class CoursesService {
         .returning(['courses.id', 'courses.name'])
         .executeTakeFirst()
     } catch (error) {
-      console.log('error: ', error)
+      this.logger.fatal('unable to create course', { name, description })
     }
   }
 
@@ -33,7 +35,10 @@ export class CoursesService {
         .returning(['courses.id', 'courses.name'])
         .executeTakeFirst()
     } catch (error) {
-      console.log('error: ', error)
+      this.logger.fatal(
+        `unable to update course ${updateCourseDTO.id}`,
+        updateCourseDTO.id
+      )
     }
   }
 
@@ -45,23 +50,27 @@ export class CoursesService {
         .returning('courses.id')
         .executeTakeFirst()
     } catch (error) {
-      console.log('error: ', error)
+      this.logger.fatal('unable to delete course', id)
     }
   }
 
   async find(id: string) {
-    return await db
-      .selectFrom('courses')
-      .selectAll()
-      .where('courses.id', '=', id)
-      .executeTakeFirst()
+    try {
+      return await db
+        .selectFrom('courses')
+        .selectAll()
+        .where('courses.id', '=', id)
+        .executeTakeFirst()
+    } catch (error) {
+      this.logger.fatal('unable to find course', id)
+    }
   }
 
   async findAll() {
     try {
       return await db.selectFrom('courses').selectAll().execute()
     } catch (error) {
-      console.log(error)
+      this.logger.fatal('unable to find all available course')
     }
   }
 }
