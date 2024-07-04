@@ -5,15 +5,18 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
-  FormLabel
+  FormLabel,
+  FormMessage
 } from '@/components/ui/form'
 
 import useDocumentTitle from '@/hooks/use-document-title'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
+import { http } from '@/lib/axios'
 
 const formSchema = z.object({
   name: z.string(),
@@ -32,57 +35,66 @@ export default function CreateCoursePage() {
   })
 
   async function onHandleSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
-  }
-
-  function CreateForm() {
-    return (
-      <Form {...form}>
-        <form className='w-full' onSubmit={form.handleSubmit(onHandleSubmit)}>
-          <div className='space-y-3'>
-            <FormField
-              control={form.control}
-              name='name'
-              render={() => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input placeholder='Javascript 101' />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name='description'
-              render={() => (
-                <FormItem>
-                  <FormLabel>Description</FormLabel>
-                  <FormControl>
-                    <Textarea placeholder='Course description' />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            <Button type='submit'>Create</Button>
-          </div>
-        </form>
-      </Form>
-    )
+    const course = await http.post('/courses/create', values)
+    console.log(course)
   }
 
   return (
-    <div className='relative h-screen'>
-      <div className='absolute '>
-        <div className='max-w-xl mx-auto space-y-6'>
-          <div>
-            <h1 className='text-xl font-medium'>Create new course</h1>
-            <p className='text-gray-500'>
-              Provide a course name that catch attention
-            </p>
-          </div>
-          <CreateForm />
+    <div className='flex h-screen'>
+      <div className='max-w-xl m-auto space-y-6'>
+        <div className='mx-auto text-left'>
+          <h1 className='text-2xl font-bold sm:text-3xl'>Create new course</h1>
+          <p className='mt-2 text-gray-500'>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et libero
+            nulla eaque error neque ipsa culpa autem, at itaque nostrum!
+          </p>
         </div>
+        <Form {...form}>
+          <form
+            className='mx-auto mb-0 mt-8 space-y-4'
+            onSubmit={form.handleSubmit(onHandleSubmit)}
+          >
+            <div className='space-y-3'>
+              <FormField
+                name='name'
+                control={form.control}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        autoComplete='off'
+                        placeholder='Introduction to web development'
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormDescription>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                name='description'
+                control={form.control}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Description</FormLabel>
+                    <FormControl>
+                      <Textarea placeholder='Course description' {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className='w-full flex items-center justify-end space-x-3'>
+              <Button variant='ghost'>Cancel</Button>
+              <Button type='submit'>Create</Button>
+            </div>
+          </form>
+        </Form>
       </div>
     </div>
   )

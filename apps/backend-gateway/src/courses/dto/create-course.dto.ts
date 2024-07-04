@@ -7,4 +7,7 @@ export const courseSchema = z
   })
   .required()
 
-export type CreateCourseDTO = z.infer<typeof courseSchema>
+export class CreateCourseDTO {
+  name: string
+  description: string
+}
