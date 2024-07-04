@@ -17,6 +17,8 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import { http } from '@/lib/axios'
+import { useToast } from '@/hooks/use-toast'
+import { useNavigate } from 'react-router-dom'
 
 const formSchema = z.object({
   name: z.string(),
@@ -25,6 +27,9 @@ const formSchema = z.object({
 
 export default function CreateCoursePage() {
   useDocumentTitle('Create new course')
+
+  const { toast } = useToast()
+  const navigate = useNavigate()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -35,8 +40,20 @@ export default function CreateCoursePage() {
   })
 
   async function onHandleSubmit(values: z.infer<typeof formSchema>) {
-    const course = await http.post('/courses/create', values)
-    console.log(course)
+    try {
+      const { data } = await http.post('/courses/create', values)
+
+      navigate(`/course/${data.id}/edit`)
+
+      toast({
+        description: `successfully created ${data.name}`
+      })
+    } catch (error) {
+      toast({
+        title: 'Uh oh! Something went wrong.',
+        description: 'There was a problem with your request.'
+      })
+    }
   }
 
   return (
