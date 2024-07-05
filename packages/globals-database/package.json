@@ -21,6 +21,7 @@
     "prisma-kysely": "^1.8.0"
   },
   "devDependencies": {
+    "@types/node": "^20.14.9",
     "@types/pg": "^8.11.6",
     "prisma": "^5.15.0",
     "tsup": "^8.1.0"
