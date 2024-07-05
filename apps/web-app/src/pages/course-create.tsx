@@ -56,6 +56,10 @@ export default function CreateCoursePage() {
     }
   }
 
+  async function onHandleCancel() {
+    navigate(`/`)
+  }
+
   return (
     <div className='flex h-screen'>
       <div className='max-w-xl m-auto space-y-6'>
@@ -107,7 +111,9 @@ export default function CreateCoursePage() {
               />
             </div>
             <div className='w-full flex items-center justify-end space-x-3'>
-              <Button variant='ghost'>Cancel</Button>
+              <Button variant='ghost' onClick={onHandleCancel}>
+                Cancel
+              </Button>
               <Button type='submit'>Create</Button>
             </div>
           </form>
