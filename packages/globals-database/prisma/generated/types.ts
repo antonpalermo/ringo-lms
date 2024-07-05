@@ -16,6 +16,7 @@ export type Course = {
   id: Generated<string>
   name: string
   description: string | null
+  isDraft: Generated<boolean>
   dateCreated: Generated<Timestamp>
   dateUpdated: Generated<Timestamp>
 }

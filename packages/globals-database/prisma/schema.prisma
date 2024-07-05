@@ -17,6 +17,7 @@ model Course {
   id          String   @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name        String
   description String?
+  isDraft     Boolean  @default(true)
   dateCreated DateTime @default(now())
   dateUpdated DateTime @default(now()) @updatedAt()
 
