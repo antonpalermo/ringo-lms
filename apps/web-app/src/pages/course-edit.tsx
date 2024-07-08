@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Trash2, InfoIcon, FileIcon, AlbumIcon } from 'lucide-react'
+import { Trash2, InfoIcon, FileIcon, AlbumIcon, ImageIcon } from 'lucide-react'
 
 import useDocumentTitle from '@/hooks/use-document-title'
 
@@ -23,6 +23,7 @@ import {
   FormItem,
   FormLabel
 } from '@/components/ui/form'
+import Chapter from '@/components/chapter'
 
 function Heading() {
   return (
@@ -89,6 +90,24 @@ function CourseDetailsForm() {
 export default function EditCoursePage() {
   useDocumentTitle(`Edit - Untitled`)
 
+  const chapters = [
+    {
+      name: 'Introduction',
+      duration: '3:00',
+      isFree: true
+    },
+    {
+      name: 'Javascript Data Types',
+      duration: '4:24',
+      isFree: false
+    },
+    {
+      name: 'Functions',
+      duration: '2:54',
+      isFree: false
+    }
+  ]
+
   return (
     <div className='max-w-5xl mx-auto py-20 space-y-10'>
       <div className='w-full grid grid-cols-2'>
@@ -100,33 +119,57 @@ export default function EditCoursePage() {
           </Button>
         </div>
       </div>
-      <Card>
-        <CardHeader>
-          <CardTitle className='flex items-center'>
-            <InfoIcon className='w-5 h-5 mr-2' />
-            Course Details
-          </CardTitle>
-          <CardDescription>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className='grid grid-cols-2 gap-3'>
+      <div className='grid grid-cols-2 gap-5'>
+        <Card>
+          <CardHeader>
+            <CardTitle className='flex items-center'>
+              <InfoIcon className='w-5 h-5 mr-2' />
+              Course Details
+            </CardTitle>
+            <CardDescription>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
             <CourseDetailsForm />
-            <div className='border-2 rounded border-dashed flex'>
-              <div className='m-auto flex flex-col items-center'>
-                <FileIcon className='w-5 h-5' />
-                <span className='text-sm text-gray-500'>
-                  Upload cover image
-                </span>
+          </CardContent>
+          <CardFooter>
+            <Button>Save</Button>
+          </CardFooter>
+        </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle className='flex items-center'>
+              <ImageIcon className='w-5 h-5 mr-2' />
+              Cover Image
+            </CardTitle>
+            <CardDescription>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className='col-span-full'>
+              <div className='mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10'>
+                <div className='text-center'>
+                  <FileIcon
+                    aria-hidden='true'
+                    className='mx-auto h-12 w-12 text-gray-300'
+                  />
+                  <div className='mt-4 flex text-sm leading-6 text-gray-600'>
+                    <p className='pl-1'>Upload a file or drag and drop</p>
+                  </div>
+                  <p className='text-xs leading-5 text-gray-600'>
+                    PNG, JPG, GIF up to 10MB
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        </CardContent>
-        <CardFooter>
-          <Button>Save</Button>
-        </CardFooter>
-      </Card>
+          </CardContent>
+          <CardFooter>
+            <Button>Upload</Button>
+          </CardFooter>
+        </Card>
+      </div>
       <Card>
         <CardHeader>
           <CardTitle className='flex items-center'>
@@ -137,7 +180,13 @@ export default function EditCoursePage() {
             Lorem ipsum dolor sit amet consectetur adipisicing elit.
           </CardDescription>
         </CardHeader>
-        <CardContent></CardContent>
+        <CardContent>
+          <div className='space-y-3'>
+            {chapters.map(chapter => (
+              <Chapter details={chapter} />
+            ))}
+          </div>
+        </CardContent>
       </Card>
     </div>
   )
