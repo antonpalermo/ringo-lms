@@ -1,9 +1,10 @@
 import { Trash2 } from 'lucide-react'
 import { useLoaderData } from 'react-router-dom'
 
+import { Course } from '@/lib/types'
 import { Button } from '@/components/ui/button'
 
-// import CourseChapters from '@/components/course/chapters'
+import CourseChapters from '@/components/course/chapters'
 import CourseDetailsForm from '@/components/course/details-form'
 import CourseUploadCover from '@/components/course/upload-cover'
 
@@ -19,15 +20,6 @@ function Heading() {
       </p>
     </div>
   )
-}
-
-type Course = {
-  name: string
-  dateCreated: Date
-  dateUpdated: Date
-  id: string
-  description: string
-  isDraft: boolean
 }
 
 export default function EditCoursePage() {
@@ -54,7 +46,7 @@ export default function EditCoursePage() {
         />
         <CourseUploadCover />
       </div>
-      {/* <CourseChapters chapters={chapters} /> */}
+      <CourseChapters chapters={course.chapters} />
     </div>
   )
 }

@@ -7,9 +7,10 @@ import {
   CardContent
 } from '@/components/ui/card'
 import Chapter from '@/components/course/chapter'
+import { Chapter as ChapterType } from '@/lib/types'
 
 export type ChaptersProps = {
-  chapters: { name: string; duration: string; isFree: boolean }[]
+  chapters: ChapterType[]
 }
 
 export default function CourseChapters({ chapters }: ChaptersProps) {
@@ -27,7 +28,7 @@ export default function CourseChapters({ chapters }: ChaptersProps) {
       <CardContent>
         <div className='space-y-3'>
           {chapters.map(chapter => (
-            <Chapter key={chapter.name} details={chapter} />
+            <Chapter key={chapter.id} details={chapter} />
           ))}
         </div>
       </CardContent>
