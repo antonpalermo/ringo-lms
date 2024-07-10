@@ -9,6 +9,9 @@ export type Chapter = {
   id: Generated<string>
   title: string
   description: string
+  duration: string
+  isDraft: Generated<boolean>
+  courseId: string | null
   dateCreated: Generated<Timestamp>
   dateUpdated: Generated<Timestamp>
 }
