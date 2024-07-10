@@ -27,7 +27,7 @@ export default function CourseChapters({ chapters }: ChaptersProps) {
       <CardContent>
         <div className='space-y-3'>
           {chapters.map(chapter => (
-            <Chapter details={chapter} />
+            <Chapter key={chapter.name} details={chapter} />
           ))}
         </div>
       </CardContent>

@@ -22,7 +22,13 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 
-export default function CourseDetailsForm() {
+export type CourseDetailsFormProps = {
+  placeholder: { name: string; description: string }
+}
+
+export default function CourseDetailsForm({
+  placeholder
+}: CourseDetailsFormProps) {
   const courseDetailSchema = z.object({
     name: z.string(),
     description: z.string()
@@ -31,8 +37,8 @@ export default function CourseDetailsForm() {
   const form = useForm<z.infer<typeof courseDetailSchema>>({
     resolver: zodResolver(courseDetailSchema),
     defaultValues: {
-      name: 'Untitled',
-      description: ''
+      name: placeholder.name,
+      description: placeholder.description
     }
   })
 

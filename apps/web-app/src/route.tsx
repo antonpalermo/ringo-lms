@@ -10,6 +10,7 @@ import SignInPage from './pages/sign-in'
 import SignUpPage from './pages/sign-up'
 import AuthLayout from './pages/layouts/auth.layout'
 import DashboardLayout from './pages/layouts/dashboard.layout'
+import courseLoader from './lib/loaders/course'
 
 const route = createBrowserRouter([
   {
@@ -35,6 +36,7 @@ const route = createBrowserRouter([
       },
       {
         path: ':courseId/edit',
+        loader: courseLoader,
         element: <EditCoursePage />
       }
     ]

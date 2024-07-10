@@ -1,8 +1,9 @@
 import { Trash2 } from 'lucide-react'
+import { useLoaderData } from 'react-router-dom'
 
 import { Button } from '@/components/ui/button'
 
-import CourseChapters from '@/components/course/chapters'
+// import CourseChapters from '@/components/course/chapters'
 import CourseDetailsForm from '@/components/course/details-form'
 import CourseUploadCover from '@/components/course/upload-cover'
 
@@ -20,43 +21,40 @@ function Heading() {
   )
 }
 
-export default function EditCoursePage() {
-  useDocumentTitle(`Edit - Untitled`)
+type Course = {
+  name: string
+  dateCreated: Date
+  dateUpdated: Date
+  id: string
+  description: string
+  isDraft: boolean
+}
 
-  const chapters = [
-    {
-      name: 'Introduction',
-      duration: '3:00',
-      isFree: true
-    },
-    {
-      name: 'Javascript Data Types',
-      duration: '4:24',
-      isFree: false
-    },
-    {
-      name: 'Functions',
-      duration: '2:54',
-      isFree: false
-    }
-  ]
+export default function EditCoursePage() {
+  const course = useLoaderData() as Course
+
+  useDocumentTitle(`Edit - Untitled`)
 
   return (
     <div className='max-w-5xl mx-auto py-20 space-y-10'>
       <div className='w-full grid grid-cols-2'>
         <Heading />
         <div className='flex items-center space-x-3 place-content-end'>
-          <Button variant='outline'>Publish</Button>
+          <Button variant='outline'>
+            {course.isDraft ? 'Publish' : 'Unpublished'}
+          </Button>
           <Button size='icon'>
             <Trash2 className='w-4 h-4' />
           </Button>
         </div>
       </div>
       <div className='grid grid-cols-2 gap-5'>
-        <CourseDetailsForm />
+        <CourseDetailsForm
+          placeholder={{ name: course.name, description: course.description }}
+        />
         <CourseUploadCover />
       </div>
-      <CourseChapters chapters={chapters} />
+      {/* <CourseChapters chapters={chapters} /> */}
     </div>
   )
 }
