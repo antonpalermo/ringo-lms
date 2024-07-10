@@ -1,4 +1,5 @@
 import type { ColumnType } from 'kysely'
+
 export type Generated<T> =
   T extends ColumnType<infer S, infer I, infer U>
     ? ColumnType<S, I | undefined, U>
@@ -27,3 +28,6 @@ export type DB = {
   chapters: Chapter
   courses: Course
 }
+
+export * from 'kysely'
+export * from 'kysely/helpers/postgres'
