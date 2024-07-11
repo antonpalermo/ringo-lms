@@ -14,11 +14,13 @@ datasource db {
 }
 
 model Course {
-  id          String   @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id          String    @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name        String
   description String?
-  dateCreated DateTime @default(now())
-  dateUpdated DateTime @default(now()) @updatedAt()
+  isDraft     Boolean   @default(true)
+  chapters    Chapter[]
+  dateCreated DateTime  @default(now())
+  dateUpdated DateTime  @default(now()) @updatedAt()
 
   @@index([id])
   @@map("courses")
@@ -26,8 +28,12 @@ model Course {
 
 model Chapter {
   id          String   @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title       String
+  name        String
   description String
+  duration    String
+  isDraft     Boolean  @default(true)
+  course      Course?  @relation(fields: [courseId], references: [id])
+  courseId    String?  @db.Uuid
   dateCreated DateTime @default(now())
   dateUpdated DateTime @default(now()) @updatedAt()
 

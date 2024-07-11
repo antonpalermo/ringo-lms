@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common'
-import { db } from '@packages/globals-database'
+import { db, jsonArrayFrom } from '@packages/globals-database'
 
 import { CreateCourseDTO } from './dto/create-course.dto'
 import { UpdateCourseDTO } from './dto/update-course.dto'
@@ -58,7 +58,25 @@ export class CoursesService {
     try {
       return await db
         .selectFrom('courses')
-        .selectAll()
+        .select(({ eb }) => [
+          'courses.id',
+          'courses.name',
+          'courses.description',
+          'courses.isDraft',
+          jsonArrayFrom(
+            eb
+              .selectFrom('chapters')
+              .select([
+                'chapters.id',
+                'chapters.name',
+                'chapters.isDraft',
+                'chapters.duration'
+              ])
+              .whereRef('chapters.courseId', '=', 'courses.id')
+          ).as('chapters'),
+          'courses.dateCreated',
+          'courses.dateUpdated'
+        ])
         .where('courses.id', '=', id)
         .executeTakeFirst()
     } catch (error) {
