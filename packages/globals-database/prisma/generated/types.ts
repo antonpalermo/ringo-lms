@@ -8,7 +8,7 @@ export type Timestamp = ColumnType<Date, Date | string, Date | string>
 
 export type Chapter = {
   id: Generated<string>
-  title: string
+  name: string
   description: string
   duration: string
   isDraft: Generated<boolean>

@@ -1,6 +1,6 @@
 export type Chapter = {
   id: string
-  title: string
+  name: string
   description: string
   duration: string
   isDraft: boolean

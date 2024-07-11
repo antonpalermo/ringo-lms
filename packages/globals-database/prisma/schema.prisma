@@ -28,7 +28,7 @@ model Course {
 
 model Chapter {
   id          String   @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title       String
+  name        String
   description String
   duration    String
   isDraft     Boolean  @default(true)

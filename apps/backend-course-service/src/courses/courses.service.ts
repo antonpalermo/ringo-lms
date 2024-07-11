@@ -66,7 +66,12 @@ export class CoursesService {
           jsonArrayFrom(
             eb
               .selectFrom('chapters')
-              .selectAll()
+              .select([
+                'chapters.id',
+                'chapters.name',
+                'chapters.isDraft',
+                'chapters.duration'
+              ])
               .whereRef('chapters.courseId', '=', 'courses.id')
           ).as('chapters'),
           'courses.dateCreated',
