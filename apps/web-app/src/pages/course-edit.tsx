@@ -10,14 +10,20 @@ import CourseUploadCover from '@/components/course/upload-cover'
 
 import useDocumentTitle from '@/hooks/use-document-title'
 
-function Heading() {
+type HeadingProps = {
+  course: {
+    name: string
+    description: string
+  }
+}
+
+function Heading({ course }: HeadingProps) {
   return (
-    <div className='m-auto text-left'>
-      <h1 className='text-2xl font-bold sm:text-3xl'>Edit Untitled Course</h1>
-      <p className='mt-2 text-gray-500'>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Et libero nulla
-        eaque error neque ipsa culpa autem, at itaque nostrum!
-      </p>
+    <div className='w-full m-auto text-left'>
+      <h1 className='text-2xl font-bold sm:text-3xl'>
+        Edit {course.name} Course
+      </h1>
+      <p className='mt-2 text-gray-500'>{course.description}</p>
     </div>
   )
 }
@@ -25,12 +31,14 @@ function Heading() {
 export default function EditCoursePage() {
   const course = useLoaderData() as Course
 
-  useDocumentTitle(`Edit - Untitled`)
+  useDocumentTitle(`Edit - ${course.name}`)
 
   return (
     <div className='max-w-5xl mx-auto py-20 space-y-10'>
       <div className='w-full grid grid-cols-2'>
-        <Heading />
+        <Heading
+          course={{ name: course.name, description: course.description }}
+        />
         <div className='flex items-center space-x-3 place-content-end'>
           <Button variant='outline'>
             {course.isDraft ? 'Publish' : 'Unpublished'}
