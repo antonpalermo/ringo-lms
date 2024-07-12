@@ -7,7 +7,8 @@ import {
   Param,
   Controller,
   ParseUUIDPipe,
-  UsePipes
+  UsePipes,
+  UseFilters
 } from '@nestjs/common'
 
 import { CourseService } from './course.service'
@@ -16,6 +17,7 @@ import { UpdateCourseDTO } from './dto/update-course.dto'
 import { ZodValidationPipe } from '../pipes/zod.pipe'
 
 import { courseSchema } from '../courses/dto/create-course.dto'
+import { NotFoundRpcExceptionFilter } from 'src/filters/not-found.filter'
 
 @Controller('courses')
 export class CourseController {
@@ -26,6 +28,7 @@ export class CourseController {
     return this.courseService.fetchAllCourse()
   }
 
+  @UseFilters(new NotFoundRpcExceptionFilter())
   @Get(':id')
   getCourse(@Param('id', new ParseUUIDPipe()) id: string): any {
     return this.courseService.fetchCourse(id)

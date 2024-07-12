@@ -1,5 +1,5 @@
 import { Controller } from '@nestjs/common'
-import { MessagePattern } from '@nestjs/microservices'
+import { MessagePattern, RpcException } from '@nestjs/microservices'
 
 import { CoursesService } from './courses.service'
 import { CreateCourseDTO } from './dto/create-course.dto'
@@ -31,6 +31,15 @@ export class CoursesController {
 
   @MessagePattern({ cmd: 'get_course' })
   async getCourse(id: string) {
-    return await this.courseService.find(id)
+    const course = await this.courseService.find(id)
+
+    if (!course) {
+      throw new RpcException({
+        status: 404,
+        message: 'The requested resource is not avaialble'
+      })
+    }
+
+    return course
   }
 }
