@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { Package2, Bell } from 'lucide-react'
 import { Outlet } from 'react-router-dom'
-import Navbar from '@/components/dashboard/navbar'
+import Navbar from '@/components/dashboard/header'
 
 export default function DashboardLayout() {
   return (

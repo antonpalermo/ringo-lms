@@ -2,8 +2,6 @@ import { Module } from '@nestjs/common'
 import { ClientsModule, Transport } from '@nestjs/microservices'
 
 import { CourseController } from './courses/course.controller'
-import { CourseService } from './courses/course.service'
-import { AuthService } from './auth/auth.service'
 import { AuthController } from './auth/auth.controller'
 
 @Module({
@@ -13,7 +11,6 @@ import { AuthController } from './auth/auth.controller'
       { name: 'COURSES', transport: Transport.TCP, options: { port: 3001 } }
     ])
   ],
-  controllers: [CourseController, AuthController],
-  providers: [CourseService, AuthService]
+  controllers: [CourseController, AuthController]
 })
 export class AppModule {}

@@ -1,12 +1,12 @@
-import { Controller, Get } from '@nestjs/common'
-import { AuthService } from './auth.service'
+import { Controller, Get, Inject } from '@nestjs/common'
+import { ClientProxy } from '@nestjs/microservices'
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(@Inject('AUTH') private readonly authClient: ClientProxy) {}
 
   @Get('signin')
   signin() {
-    return this.authService.signIn()
+    return this.authClient.send({ cmd: 'auth_signin' }, {})
   }
 }
