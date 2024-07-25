@@ -16,7 +16,7 @@ import { CreateCourseDTO } from './dto/create-course.dto'
 import { UpdateCourseDTO } from './dto/update-course.dto'
 import { ZodValidationPipe } from '../pipes/zod.pipe'
 
-import { courseSchema } from '../courses/dto/create-course.dto'
+import { courseSchema } from './dto/create-course.dto'
 import { NotFoundRpcExceptionFilter } from 'src/filters/not-found.filter'
 import { ClientProxy } from '@nestjs/microservices'
 
