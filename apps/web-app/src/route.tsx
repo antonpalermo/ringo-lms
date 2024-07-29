@@ -31,10 +31,11 @@ const route = createBrowserRouter([
     ]
   },
   {
-    path: '/course',
+    path: 'courses',
     children: [
       {
         path: ':courseId',
+        loader: courseLoader,
         element: <CoursePage />
       },
       {

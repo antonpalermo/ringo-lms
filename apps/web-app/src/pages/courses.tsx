@@ -15,7 +15,7 @@ export default function CoursesPage() {
       </div>
       <div className='grid lg:grid-cols-3 md:grid-cols-1 gap-5'>
         {courses.map(course => (
-          <Card>
+          <Card key={course.id}>
             <CardContent>
               <h2 className='mt-6 text-lg font-medium'>{course.name}</h2>
               <p className='text-muted-foreground text-sm'>
